@@ -12,16 +12,23 @@ using System.Windows.Forms;
 
 namespace Peliculas.View
 {
-    public partial class ingresarPelicula : UserControl
+    public partial class IngresarPelicula : UserControl
     {
-        public ingresarPelicula()
+        public IngresarPelicula()
         {
             InitializeComponent();
         }
 
+        private void ResetForm()
+        {
+            TxtTitulo.Clear();
+            TxtFechaEstreno.ResetText();
+            TxtDirector.Clear();
+            TxtRecaudacion.ResetText();
+        }
+
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-
             Pelicula pelicula1 = new()
             {
                 Titulo = TxtTitulo.Text,
@@ -30,17 +37,14 @@ namespace Peliculas.View
                 Recaudacion = Convert.ToDecimal(TxtRecaudacion.Text)
             };
 
-            MessageBox.Show($"{pelicula1.Titulo} {pelicula1.Recaudacion} {pelicula1.Director} {pelicula1.FechaEstreno} {pelicula1.Id}");
-
             int result = PeliculaRepo.InsertPelicula(pelicula1);
             if (result == 0) {
-                MessageBox.Show("No se realizo el ingreso");
-
+                MessageBox.Show("No se realizo el Ingreso");
             }
             else
             {
                 MessageBox.Show("Ingreso correcto");
-
+                ResetForm();
             }
 
         }

@@ -1,6 +1,6 @@
 ﻿namespace Peliculas.View
 {
-    partial class ingresarPelicula
+    partial class IngresarPelicula
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -181,13 +181,17 @@
             // TxtFechaEstreno
             // 
             TxtFechaEstreno.CalendarFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtFechaEstreno.CustomFormat = "yyyy-MM-dd";
             TxtFechaEstreno.Dock = DockStyle.Top;
             TxtFechaEstreno.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxtFechaEstreno.Format = DateTimePickerFormat.Custom;
+            TxtFechaEstreno.Format = DateTimePickerFormat.Short;
             TxtFechaEstreno.Location = new Point(294, 117);
+            TxtFechaEstreno.MaxDate = new DateTime(2024, 7, 17, 0, 0, 0, 0);
+            TxtFechaEstreno.MinDate = new DateTime(1950, 1, 1, 0, 0, 0, 0);
             TxtFechaEstreno.Name = "TxtFechaEstreno";
             TxtFechaEstreno.Size = new Size(227, 23);
             TxtFechaEstreno.TabIndex = 12;
+            TxtFechaEstreno.Value = new DateTime(2024, 7, 17, 0, 0, 0, 0);
             // 
             // ingresarPelicula
             // 

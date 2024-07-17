@@ -1,3 +1,4 @@
+using Peliculas.Model;
 using Peliculas.View;
 
 namespace Peliculas
@@ -7,8 +8,8 @@ namespace Peliculas
         public Form1()
         {
             InitializeComponent();
-            ConexionBD();
         }
+
 
         private static void ConexionBD()
         {
@@ -22,7 +23,7 @@ namespace Peliculas
             {
                 MessageBox.Show("No hay conexion con la Base de Datos");
             }
-            
+
         }
 
         private void MostrarVistas(UserControl userControl)
@@ -36,13 +37,13 @@ namespace Peliculas
 
         private void BtnVerTodas_Click(object sender, EventArgs e)
         {
-            ListaPeliculas listaPeliculas = new ();
+            ListaPeliculas listaPeliculas = new();
             MostrarVistas(listaPeliculas);
         }
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
-            ingresarPelicula ingresarPelicula = new ();
+            IngresarPelicula ingresarPelicula = new();
             MostrarVistas(ingresarPelicula);
         }
 
@@ -55,5 +56,15 @@ namespace Peliculas
         {
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Inicio inicio = new ();
+            MostrarVistas(inicio);
+            ConexionBD();
+
+        }
+
+       
     }
 }

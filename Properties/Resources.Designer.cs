@@ -63,10 +63,56 @@ namespace Peliculas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Captura_de_pantalla__6_ {
+            get {
+                object obj = ResourceManager.GetObject("Captura de pantalla (6)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        internal static string director {
+            get {
+                return ResourceManager.GetString("director", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        internal static string fechaEstreno {
+            get {
+                return ResourceManager.GetString("fechaEstreno", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        internal static string recaudacion {
+            get {
+                return ResourceManager.GetString("recaudacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh25 {
             get {
                 object obj = ResourceManager.GetObject("refresh25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a .
+        /// </summary>
+        internal static string titulo {
+            get {
+                return ResourceManager.GetString("titulo", resourceCulture);
             }
         }
     }

@@ -34,7 +34,7 @@
             BtnActualizar = new Button();
             BtnEliminar = new Button();
             label1 = new Label();
-            button1 = new Button();
+            BtnRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)DataGridPeliculas).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -59,7 +59,7 @@
             tableLayoutPanel1.Controls.Add(DataGridPeliculas, 1, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 2);
             tableLayoutPanel1.Controls.Add(label1, 1, 0);
-            tableLayoutPanel1.Controls.Add(button1, 2, 0);
+            tableLayoutPanel1.Controls.Add(BtnRefresh, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -96,6 +96,7 @@
             BtnActualizar.TabIndex = 0;
             BtnActualizar.Text = "Actualizar";
             BtnActualizar.UseVisualStyleBackColor = true;
+            BtnActualizar.Click += BtnActualizar_Click;
             // 
             // BtnEliminar
             // 
@@ -107,6 +108,7 @@
             BtnEliminar.TabIndex = 1;
             BtnEliminar.Text = "Eliminar";
             BtnEliminar.UseVisualStyleBackColor = true;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // label1
             // 
@@ -119,20 +121,21 @@
             label1.TabIndex = 2;
             label1.Text = "Peliculas";
             // 
-            // button1
+            // BtnRefresh
             // 
-            button1.BackColor = Color.Transparent;
-            button1.Dock = DockStyle.Fill;
-            button1.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Image = Properties.Resources.refresh25;
-            button1.ImageAlign = ContentAlignment.TopCenter;
-            button1.Location = new Point(528, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(53, 40);
-            button1.TabIndex = 3;
-            button1.Text = "Refrescar";
-            button1.TextAlign = ContentAlignment.BottomCenter;
-            button1.UseVisualStyleBackColor = false;
+            BtnRefresh.BackColor = Color.Transparent;
+            BtnRefresh.Dock = DockStyle.Fill;
+            BtnRefresh.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnRefresh.Image = Properties.Resources.refresh25;
+            BtnRefresh.ImageAlign = ContentAlignment.TopCenter;
+            BtnRefresh.Location = new Point(528, 3);
+            BtnRefresh.Name = "BtnRefresh";
+            BtnRefresh.Size = new Size(53, 40);
+            BtnRefresh.TabIndex = 3;
+            BtnRefresh.Text = "Refrescar";
+            BtnRefresh.TextAlign = ContentAlignment.BottomCenter;
+            BtnRefresh.UseVisualStyleBackColor = false;
+            BtnRefresh.Click += BtnRefresh_Click;
             // 
             // ListaPeliculas
             // 
@@ -156,6 +159,6 @@
         private Button BtnActualizar;
         private Button BtnEliminar;
         private Label label1;
-        private Button button1;
+        private Button BtnRefresh;
     }
 }

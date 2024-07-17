@@ -135,9 +135,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 461);
             Controls.Add(panel1);
+            MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Peliculas";
+            Load += Form1_Load;
             panel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
