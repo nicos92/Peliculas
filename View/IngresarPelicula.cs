@@ -34,10 +34,10 @@ namespace Peliculas.View
                 Titulo = TxtTitulo.Text,
                 FechaEstreno = TxtFechaEstreno.Text,
                 Director = TxtDirector.Text,
-                Recaudacion = Convert.ToDecimal(TxtRecaudacion.Text)
+                Recaudacion = Convert.ToDecimal(TxtRecaudacion.Value)
             };
-
             int result = PeliculaRepo.InsertPelicula(pelicula1);
+
             if (result == 0) {
                 MessageBox.Show("No se realizo el Ingreso");
             }

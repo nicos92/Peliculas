@@ -22,6 +22,10 @@ namespace Peliculas.Model
             this.Recaudacion = recaudacion;
         }
 
+        public void VerDatos()
+        {
+            MessageBox.Show($"{Titulo} {FechaEstreno} {Director}  {  Recaudacion}");
+        }
        
     }
 }

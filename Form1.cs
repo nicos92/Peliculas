@@ -1,4 +1,5 @@
 using Peliculas.Model;
+using Peliculas.Utils;
 using Peliculas.View;
 
 namespace Peliculas
@@ -26,25 +27,17 @@ namespace Peliculas
 
         }
 
-        private void MostrarVistas(UserControl userControl)
-        {
-            userControl.Dock = DockStyle.Fill;
-            PanelVistas.Controls.Clear();
-            PanelVistas.Controls.Add(userControl);
-            userControl.BringToFront();
-
-        }
 
         private void BtnVerTodas_Click(object sender, EventArgs e)
         {
             ListaPeliculas listaPeliculas = new();
-            MostrarVistas(listaPeliculas);
+            UtilVistas.MostrarVistas(listaPeliculas, PanelVistas);
         }
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             IngresarPelicula ingresarPelicula = new();
-            MostrarVistas(ingresarPelicula);
+            UtilVistas.MostrarVistas(ingresarPelicula, PanelVistas);
         }
 
         private void BtnConsultar_Click(object sender, EventArgs e)
@@ -60,7 +53,7 @@ namespace Peliculas
         private void Form1_Load(object sender, EventArgs e)
         {
             Inicio inicio = new ();
-            MostrarVistas(inicio);
+            UtilVistas.MostrarVistas(inicio, PanelVistas);
             ConexionBD();
 
         }

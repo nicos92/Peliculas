@@ -35,9 +35,11 @@
             BtnEliminar = new Button();
             label1 = new Label();
             BtnRefresh = new Button();
+            PanelPeliculas = new Panel();
             ((System.ComponentModel.ISupportInitialize)DataGridPeliculas).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            PanelPeliculas.SuspendLayout();
             SuspendLayout();
             // 
             // DataGridPeliculas
@@ -49,6 +51,8 @@
             DataGridPeliculas.Name = "DataGridPeliculas";
             DataGridPeliculas.Size = new Size(461, 362);
             DataGridPeliculas.TabIndex = 0;
+            DataGridPeliculas.RowsAdded += DataGridPeliculas_RowsAdded;
+            DataGridPeliculas.RowsRemoved += DataGridPeliculas_RowsRemoved;
             // 
             // tableLayoutPanel1
             // 
@@ -137,17 +141,27 @@
             BtnRefresh.UseVisualStyleBackColor = false;
             BtnRefresh.Click += BtnRefresh_Click;
             // 
+            // PanelPeliculas
+            // 
+            PanelPeliculas.Controls.Add(tableLayoutPanel1);
+            PanelPeliculas.Dock = DockStyle.Fill;
+            PanelPeliculas.Location = new Point(0, 0);
+            PanelPeliculas.Name = "PanelPeliculas";
+            PanelPeliculas.Size = new Size(584, 461);
+            PanelPeliculas.TabIndex = 4;
+            // 
             // ListaPeliculas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(PanelPeliculas);
             Name = "ListaPeliculas";
             Size = new Size(584, 461);
             ((System.ComponentModel.ISupportInitialize)DataGridPeliculas).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
+            PanelPeliculas.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -160,5 +174,6 @@
         private Button BtnEliminar;
         private Label label1;
         private Button BtnRefresh;
+        private Panel PanelPeliculas;
     }
 }

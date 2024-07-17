@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Peliculas.ConexBD
 {
-    public class ConexBD
+    public static class ConexBD
     {
         private const string DATABASE = "peliculas"; // NOMBRE DE LA BASE DE DATOS
-        private const string DATASOURCE = "e"; // "nicos\\SQLEXPRESS"; 
+        private const string DATASOURCE =  "nicos\\SQLEXPRESS"; 
         private const string INTEGRATED_SECURITY = "SSPI"; //  se utilizan las credenciales de la cuenta de Windows actual para la autenticación.
         private const string PERSIST_SECURITY_INFO = "false";
         /*
@@ -31,9 +31,11 @@ namespace Peliculas.ConexBD
                 conn.Open();
                 return conn;
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
+                Console.WriteLine(e.Message);
             }
+            
             return null;
         }
     }

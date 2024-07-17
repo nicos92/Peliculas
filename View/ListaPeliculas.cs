@@ -1,5 +1,6 @@
 ﻿using Peliculas.Repository;
 using Peliculas.Singleton;
+using Peliculas.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,19 +19,29 @@ namespace Peliculas.View
         {
             InitializeComponent();
             CargarListaPeliculas();
+            BtnEnable();
+
         }
 
-        private void CargarListaPeliculas() => DataGridPeliculas.DataSource = PeliculaRepo.GetAllPeliculas();
+        private void CargarListaPeliculas()
+        {
+            DataGridPeliculas.DataSource = PeliculaRepo.GetAllPeliculas();
+        }
 
         private void DataSelectionChanged()
         {
-            PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
-            pelicula.CargarDatos(Convert.ToInt32(DataGridPeliculas.CurrentRow.Cells["ID"].Value),
-                                DataGridPeliculas.CurrentRow.Cells["Titulo"].Value.ToString(),
-                                DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value.ToString(),
-                                DataGridPeliculas.CurrentRow.Cells["Director"].Value.ToString(),
-                                Convert.ToDecimal(DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value)
-                                );
+            if (DataGridPeliculas.CurrentRow != null)
+            {
+
+
+                PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
+                pelicula.CargarDatos(Convert.ToInt32(DataGridPeliculas.CurrentRow.Cells["ID"].Value),
+                                    DataGridPeliculas.CurrentRow.Cells["Titulo"].Value.ToString(),
+                                    DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value.ToString(),
+                                    DataGridPeliculas.CurrentRow.Cells["Director"].Value.ToString(),
+                                    Convert.ToDecimal(DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value)
+                                    );
+            }
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
@@ -40,12 +51,58 @@ namespace Peliculas.View
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            
+            if (DataGridPeliculas.CurrentRow.Cells["ID"].Value.ToString() != null)
+            {
+                int result = PeliculaRepo.EliminarPelicula(DataGridPeliculas.CurrentRow.Cells["ID"].Value.ToString() ?? "0");
+                if (result != 0)
+                {
+                    MessageBox.Show("Eliminacion Correcta");
+                    CargarListaPeliculas();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo Eliminar");
+
+                }
+            }
+
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
             DataSelectionChanged();
+            ActualizarPelicula actualizar = new();
+            UtilVistas.MostrarVistas(actualizar, PanelPeliculas);
+
+
+        }
+
+
+
+        private void BtnEnable()
+        {
+            if (DataGridPeliculas.RowCount.ToString() != "0")
+            {
+                BtnActualizar.Enabled = true;
+                BtnEliminar.Enabled = true;
+            }
+            else
+            {
+                BtnActualizar.Enabled = false;
+                BtnEliminar.Enabled = false;
+            }
+        }
+
+        
+
+        private void DataGridPeliculas_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            BtnEnable();
+        }
+
+        private void DataGridPeliculas_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            BtnEnable();
         }
     }
 }

@@ -30,7 +30,6 @@
         {
             panel1 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
-            label5 = new Label();
             TxtDirector = new TextBox();
             BtnGuardar = new Button();
             label1 = new Label();
@@ -61,7 +60,6 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.Controls.Add(label5, 3, 4);
             tableLayoutPanel1.Controls.Add(TxtDirector, 2, 3);
             tableLayoutPanel1.Controls.Add(BtnGuardar, 2, 5);
             tableLayoutPanel1.Controls.Add(label1, 1, 1);
@@ -85,22 +83,12 @@
             tableLayoutPanel1.Size = new Size(584, 461);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Dock = DockStyle.Top;
-            label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(527, 266);
-            label5.Name = "label5";
-            label5.Size = new Size(54, 21);
-            label5.TabIndex = 13;
-            label5.Text = "$";
-            // 
             // TxtDirector
             // 
             TxtDirector.Dock = DockStyle.Top;
             TxtDirector.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtDirector.Location = new Point(294, 193);
+            TxtDirector.MaxLength = 20;
             TxtDirector.Name = "TxtDirector";
             TxtDirector.Size = new Size(227, 29);
             TxtDirector.TabIndex = 9;
@@ -158,13 +146,14 @@
             label4.Name = "label4";
             label4.Size = new Size(227, 21);
             label4.TabIndex = 6;
-            label4.Text = "Recaudacion:";
+            label4.Text = "Recaudacion: ";
             // 
             // TxtTitulo
             // 
             TxtTitulo.Dock = DockStyle.Top;
             TxtTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtTitulo.Location = new Point(294, 41);
+            TxtTitulo.MaxLength = 20;
             TxtTitulo.Name = "TxtTitulo";
             TxtTitulo.Size = new Size(227, 29);
             TxtTitulo.TabIndex = 7;
@@ -174,9 +163,12 @@
             TxtRecaudacion.Dock = DockStyle.Top;
             TxtRecaudacion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtRecaudacion.Location = new Point(294, 269);
+            TxtRecaudacion.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
             TxtRecaudacion.Name = "TxtRecaudacion";
             TxtRecaudacion.Size = new Size(227, 29);
             TxtRecaudacion.TabIndex = 11;
+            TxtRecaudacion.Tag = "";
+            TxtRecaudacion.TextAlign = HorizontalAlignment.Right;
             // 
             // TxtFechaEstreno
             // 
@@ -184,7 +176,7 @@
             TxtFechaEstreno.CustomFormat = "yyyy-MM-dd";
             TxtFechaEstreno.Dock = DockStyle.Top;
             TxtFechaEstreno.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxtFechaEstreno.Format = DateTimePickerFormat.Short;
+            TxtFechaEstreno.Format = DateTimePickerFormat.Custom;
             TxtFechaEstreno.Location = new Point(294, 117);
             TxtFechaEstreno.MaxDate = new DateTime(2024, 7, 17, 0, 0, 0, 0);
             TxtFechaEstreno.MinDate = new DateTime(1950, 1, 1, 0, 0, 0, 0);
@@ -193,12 +185,12 @@
             TxtFechaEstreno.TabIndex = 12;
             TxtFechaEstreno.Value = new DateTime(2024, 7, 17, 0, 0, 0, 0);
             // 
-            // ingresarPelicula
+            // IngresarPelicula
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
-            Name = "ingresarPelicula";
+            Name = "IngresarPelicula";
             Size = new Size(584, 461);
             panel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
@@ -220,6 +212,5 @@
         private TextBox TxtTitulo;
         private NumericUpDown TxtRecaudacion;
         private DateTimePicker TxtFechaEstreno;
-        private Label label5;
     }
 }
