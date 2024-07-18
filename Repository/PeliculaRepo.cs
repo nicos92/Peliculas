@@ -146,5 +146,48 @@ namespace Peliculas.Repository
 
             return result;
         }
+
+        internal static List<Pelicula> FindPeliculas(string pelicula)
+        {
+            List<Pelicula> peliculas = [];
+            try
+            {
+                DatabaseConnection dbconn = DatabaseConnection.Instance;
+
+                dbconn.Open();
+
+                string Find = $"select * from pelicula where titulo like '%{pelicula}%'";
+                SqlCommand cmd = new(Find, dbconn.Connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Pelicula pelicula1 = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Titulo = reader.GetString(1),
+                        FechaEstreno = reader.GetDateTime(2).ToString(),
+                        Director = reader.GetString(3),
+                        Recaudacion = reader.GetDecimal(4)
+                    };
+
+                    peliculas.Add(pelicula1);
+                }
+                dbconn.Close();
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+
+            }
+
+            return peliculas;
+
+        }
     }
 }

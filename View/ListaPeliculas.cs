@@ -108,5 +108,10 @@ namespace Peliculas.View
         {
             BtnEnable();
         }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            DataGridPeliculas.DataSource = PeliculaRepo.FindPeliculas(TxtBuscar.Text);
+        }
     }
 }

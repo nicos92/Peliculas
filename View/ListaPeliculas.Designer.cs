@@ -33,12 +33,16 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             BtnActualizar = new Button();
             BtnEliminar = new Button();
-            label1 = new Label();
             BtnRefresh = new Button();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            label1 = new Label();
+            TxtBuscar = new TextBox();
+            BtnBuscar = new Button();
             PanelPeliculas = new Panel();
             ((System.ComponentModel.ISupportInitialize)DataGridPeliculas).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
             PanelPeliculas.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,8 +66,8 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.Controls.Add(DataGridPeliculas, 1, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 2);
-            tableLayoutPanel1.Controls.Add(label1, 1, 0);
             tableLayoutPanel1.Controls.Add(BtnRefresh, 2, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -94,9 +98,9 @@
             // BtnActualizar
             // 
             BtnActualizar.Anchor = AnchorStyles.None;
-            BtnActualizar.Location = new Point(45, 3);
+            BtnActualizar.Location = new Point(40, 5);
             BtnActualizar.Name = "BtnActualizar";
-            BtnActualizar.Size = new Size(140, 35);
+            BtnActualizar.Size = new Size(150, 30);
             BtnActualizar.TabIndex = 0;
             BtnActualizar.Text = "Actualizar";
             BtnActualizar.UseVisualStyleBackColor = true;
@@ -106,24 +110,13 @@
             // 
             BtnEliminar.Anchor = AnchorStyles.None;
             BtnEliminar.FlatAppearance.BorderColor = Color.Red;
-            BtnEliminar.Location = new Point(275, 3);
+            BtnEliminar.Location = new Point(270, 5);
             BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(140, 35);
+            BtnEliminar.Size = new Size(150, 30);
             BtnEliminar.TabIndex = 1;
             BtnEliminar.Text = "Eliminar";
             BtnEliminar.UseVisualStyleBackColor = true;
             BtnEliminar.Click += BtnEliminar_Click;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.None;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(248, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(87, 25);
-            label1.TabIndex = 2;
-            label1.Text = "Peliculas";
             // 
             // BtnRefresh
             // 
@@ -140,6 +133,55 @@
             BtnRefresh.TextAlign = ContentAlignment.BottomCenter;
             BtnRefresh.UseVisualStyleBackColor = false;
             BtnRefresh.Click += BtnRefresh_Click;
+            // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.Controls.Add(label1, 0, 0);
+            tableLayoutPanel3.Controls.Add(TxtBuscar, 1, 0);
+            tableLayoutPanel3.Controls.Add(BtnBuscar, 2, 0);
+            tableLayoutPanel3.Dock = DockStyle.Fill;
+            tableLayoutPanel3.Location = new Point(61, 3);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new Size(461, 40);
+            tableLayoutPanel3.TabIndex = 5;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.None;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(33, 7);
+            label1.Name = "label1";
+            label1.Size = new Size(87, 25);
+            label1.TabIndex = 4;
+            label1.Text = "Peliculas";
+            // 
+            // TxtBuscar
+            // 
+            TxtBuscar.Anchor = AnchorStyles.None;
+            TxtBuscar.Location = new Point(156, 8);
+            TxtBuscar.MaxLength = 23;
+            TxtBuscar.Name = "TxtBuscar";
+            TxtBuscar.Size = new Size(147, 23);
+            TxtBuscar.TabIndex = 5;
+            // 
+            // BtnBuscar
+            // 
+            BtnBuscar.Anchor = AnchorStyles.None;
+            BtnBuscar.Cursor = Cursors.Hand;
+            BtnBuscar.Location = new Point(327, 7);
+            BtnBuscar.Name = "BtnBuscar";
+            BtnBuscar.Size = new Size(112, 26);
+            BtnBuscar.TabIndex = 6;
+            BtnBuscar.Text = "Buscar";
+            BtnBuscar.UseVisualStyleBackColor = true;
+            BtnBuscar.Click += BtnBuscar_Click;
             // 
             // PanelPeliculas
             // 
@@ -159,8 +201,9 @@
             Size = new Size(584, 461);
             ((System.ComponentModel.ISupportInitialize)DataGridPeliculas).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
             PanelPeliculas.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -172,8 +215,11 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Button BtnActualizar;
         private Button BtnEliminar;
-        private Label label1;
         private Button BtnRefresh;
         private Panel PanelPeliculas;
+        private TableLayoutPanel tableLayoutPanel3;
+        private Label label1;
+        private TextBox TxtBuscar;
+        private Button BtnBuscar;
     }
 }
