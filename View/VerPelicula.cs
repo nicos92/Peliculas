@@ -14,9 +14,9 @@ using System.Windows.Forms;
 
 namespace Peliculas.View
 {
-    public partial class ActualizarPelicula : UserControl
+    public partial class VerPelicula : UserControl
     {
-        public ActualizarPelicula()
+        public VerPelicula()
         {
             InitializeComponent();
             CargarCampos();
@@ -25,25 +25,25 @@ namespace Peliculas.View
         private void CargarCampos()
         {
             PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
-            TxtIdActualizar.Text = pelicula.Id.ToString();
-            TxtTituloActualizar.Text = pelicula.Titulo;
-            TxtFechaEstrenoActualizar.Text = pelicula.FechaEstreno;
-            TxtDirectorActualizar.Text = pelicula.Director;
-            TxtRecaudacionActualizar.Value = Convert.ToDecimal(pelicula.Recaudacion);
+            TxtIdVer.Text = pelicula.Id.ToString();
+            TxtTituloVer.Text = pelicula.Titulo;
+            TxtFechaEstrenoVer.Text = pelicula.FechaEstreno;
+            TxtDirectorVer.Text = pelicula.Director;
+            TxtRecaudacionVer.Value = Convert.ToDecimal(pelicula.Recaudacion);
         }
 
-        private void BtnActualizarActualizar_Click(object sender, EventArgs e)
+        private void BtnActualizar_Click(object sender, EventArgs e)
         {
             DialogResult resul = UtilVistas.CartelConfirmWarn("¿Seguro quiere Actualizar?", "Actualizacion");
             if (resul == DialogResult.Yes)
             {
                 Pelicula pelicula1 = new()
                 {
-                    Id = Convert.ToInt32(TxtIdActualizar.Text),
-                    Titulo = TxtTituloActualizar.Text,
-                    FechaEstreno = TxtFechaEstrenoActualizar.Text,
-                    Director = TxtDirectorActualizar.Text,
-                    Recaudacion = Convert.ToDecimal(TxtRecaudacionActualizar.Value.ToString().Replace(",", "."))
+                    Id = Convert.ToInt32(TxtIdVer.Text),
+                    Titulo = TxtTituloVer.Text,
+                    FechaEstreno = TxtFechaEstrenoVer.Text,
+                    Director = TxtDirectorVer.Text,
+                    Recaudacion =  Convert.ToDecimal(TxtRecaudacionVer.Value.ToString().Replace(",","."))
                 };
 
                 int result = PeliculaRepo.ActualizarPelicula(pelicula1);
@@ -57,9 +57,15 @@ namespace Peliculas.View
                     MessageBox.Show("Actualizacion correcta");
 
                 }
-                UtilVistas.MostrarVistas(new ListaPeliculas(), Panel1Actualizar);
+                UtilVistas.MostrarVistas(new ListaPeliculas(), PanelVerPelicula);
             }
         }
 
+        private void BtnEliminarVer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

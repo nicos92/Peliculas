@@ -16,5 +16,7 @@ namespace Peliculas.Utils
             userControl.BringToFront();
 
         }
+        public static DialogResult CartelConfirmWarn(string msj, string titulo) => MessageBox.Show(msj, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
     }
 }

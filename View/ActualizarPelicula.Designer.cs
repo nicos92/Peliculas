@@ -93,7 +93,7 @@
             TxtIdActualizar.MaxLength = 20;
             TxtIdActualizar.Name = "TxtIdActualizar";
             TxtIdActualizar.Size = new Size(227, 29);
-            TxtIdActualizar.TabIndex = 13;
+            TxtIdActualizar.TabIndex = 44;
             TxtIdActualizar.Visible = false;
             // 
             // TxtDirectorActualizar
@@ -104,7 +104,7 @@
             TxtDirectorActualizar.MaxLength = 20;
             TxtDirectorActualizar.Name = "TxtDirectorActualizar";
             TxtDirectorActualizar.Size = new Size(227, 29);
-            TxtDirectorActualizar.TabIndex = 9;
+            TxtDirectorActualizar.TabIndex = 2;
             // 
             // BtnActualizarActualizar
             // 
@@ -112,7 +112,7 @@
             BtnActualizarActualizar.Location = new Point(294, 380);
             BtnActualizarActualizar.Name = "BtnActualizarActualizar";
             BtnActualizarActualizar.Size = new Size(227, 35);
-            BtnActualizarActualizar.TabIndex = 2;
+            BtnActualizarActualizar.TabIndex = 4;
             BtnActualizarActualizar.Text = "Actualizar";
             BtnActualizarActualizar.UseVisualStyleBackColor = true;
             BtnActualizarActualizar.Click += BtnActualizarActualizar_Click;
@@ -125,7 +125,7 @@
             label1.Location = new Point(61, 38);
             label1.Name = "label1";
             label1.Size = new Size(227, 21);
-            label1.TabIndex = 3;
+            label1.TabIndex = 44;
             label1.Text = "Titulo:";
             // 
             // label2
@@ -136,7 +136,7 @@
             label2.Location = new Point(61, 114);
             label2.Name = "label2";
             label2.Size = new Size(227, 21);
-            label2.TabIndex = 4;
+            label2.TabIndex = 44;
             label2.Text = "Fecha de Estreno:";
             // 
             // label3
@@ -147,7 +147,7 @@
             label3.Location = new Point(61, 190);
             label3.Name = "label3";
             label3.Size = new Size(227, 21);
-            label3.TabIndex = 5;
+            label3.TabIndex = 44;
             label3.Text = "Director:";
             // 
             // label4
@@ -158,7 +158,7 @@
             label4.Location = new Point(61, 266);
             label4.Name = "label4";
             label4.Size = new Size(227, 21);
-            label4.TabIndex = 6;
+            label4.TabIndex = 44;
             label4.Text = "Recaudacion: ";
             // 
             // TxtTituloActualizar
@@ -169,7 +169,7 @@
             TxtTituloActualizar.MaxLength = 20;
             TxtTituloActualizar.Name = "TxtTituloActualizar";
             TxtTituloActualizar.Size = new Size(227, 29);
-            TxtTituloActualizar.TabIndex = 7;
+            TxtTituloActualizar.TabIndex = 0;
             // 
             // TxtRecaudacionActualizar
             // 
@@ -179,10 +179,9 @@
             TxtRecaudacionActualizar.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
             TxtRecaudacionActualizar.Name = "TxtRecaudacionActualizar";
             TxtRecaudacionActualizar.Size = new Size(227, 29);
-            TxtRecaudacionActualizar.TabIndex = 11;
+            TxtRecaudacionActualizar.TabIndex = 3;
             TxtRecaudacionActualizar.Tag = "";
             TxtRecaudacionActualizar.TextAlign = HorizontalAlignment.Right;
-            TxtRecaudacionActualizar.ThousandsSeparator = true;
             // 
             // TxtFechaEstrenoActualizar
             // 
@@ -196,7 +195,7 @@
             TxtFechaEstrenoActualizar.MinDate = new DateTime(1950, 1, 1, 0, 0, 0, 0);
             TxtFechaEstrenoActualizar.Name = "TxtFechaEstrenoActualizar";
             TxtFechaEstrenoActualizar.Size = new Size(227, 23);
-            TxtFechaEstrenoActualizar.TabIndex = 12;
+            TxtFechaEstrenoActualizar.TabIndex = 1;
             TxtFechaEstrenoActualizar.Value = new DateTime(2024, 7, 17, 0, 0, 0, 0);
             // 
             // ActualizarPelicula

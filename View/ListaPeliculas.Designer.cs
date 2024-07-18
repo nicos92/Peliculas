@@ -31,6 +31,7 @@
             DataGridPeliculas = new DataGridView();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            BtnVer = new Button();
             BtnActualizar = new Button();
             BtnEliminar = new Button();
             BtnRefresh = new Button();
@@ -82,25 +83,38 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.AutoScroll = true;
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(BtnActualizar, 0, 0);
-            tableLayoutPanel2.Controls.Add(BtnEliminar, 1, 0);
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.Controls.Add(BtnVer, 0, 0);
+            tableLayoutPanel2.Controls.Add(BtnActualizar, 1, 0);
+            tableLayoutPanel2.Controls.Add(BtnEliminar, 2, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(61, 417);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(461, 41);
             tableLayoutPanel2.TabIndex = 1;
+            // 
+            // BtnVer
+            // 
+            BtnVer.Anchor = AnchorStyles.None;
+            BtnVer.Location = new Point(3, 5);
+            BtnVer.Name = "BtnVer";
+            BtnVer.Size = new Size(147, 30);
+            BtnVer.TabIndex = 2;
+            BtnVer.Text = "Ver";
+            BtnVer.UseVisualStyleBackColor = true;
+            BtnVer.Click += BtnVer_Click;
             // 
             // BtnActualizar
             // 
             BtnActualizar.Anchor = AnchorStyles.None;
-            BtnActualizar.Location = new Point(40, 5);
+            BtnActualizar.Location = new Point(156, 5);
             BtnActualizar.Name = "BtnActualizar";
-            BtnActualizar.Size = new Size(150, 30);
+            BtnActualizar.Size = new Size(147, 30);
             BtnActualizar.TabIndex = 0;
             BtnActualizar.Text = "Actualizar";
             BtnActualizar.UseVisualStyleBackColor = true;
@@ -110,9 +124,9 @@
             // 
             BtnEliminar.Anchor = AnchorStyles.None;
             BtnEliminar.FlatAppearance.BorderColor = Color.Red;
-            BtnEliminar.Location = new Point(270, 5);
+            BtnEliminar.Location = new Point(309, 5);
             BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(150, 30);
+            BtnEliminar.Size = new Size(149, 30);
             BtnEliminar.TabIndex = 1;
             BtnEliminar.Text = "Eliminar";
             BtnEliminar.UseVisualStyleBackColor = true;
@@ -221,5 +235,6 @@
         private Label label1;
         private TextBox TxtBuscar;
         private Button BtnBuscar;
+        private Button BtnVer;
     }
 }

@@ -12,3 +12,5 @@ recaudacion money);
 insert into pelicula values('terminator', '2024-02-02', 'hubert', 123445);
 
 select * from pelicula;
+
+select * from pelicula where titulo like '%tone%';

@@ -1,5 +1,6 @@
 ﻿using Peliculas.Model;
 using Peliculas.Repository;
+using Peliculas.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,22 +30,27 @@ namespace Peliculas.View
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Pelicula pelicula1 = new()
+            DialogResult dialogResult = UtilVistas.CartelConfirmWarn("¿Seguro quiere ingresar?", "Ingreso");
+            if (dialogResult == DialogResult.Yes)
             {
-                Titulo = TxtTitulo.Text,
-                FechaEstreno = TxtFechaEstreno.Text,
-                Director = TxtDirector.Text,
-                Recaudacion = Convert.ToDecimal(TxtRecaudacion.Value)
-            };
-            int result = PeliculaRepo.InsertPelicula(pelicula1);
+                Pelicula pelicula1 = new()
+                {
+                    Titulo = TxtTitulo.Text,
+                    FechaEstreno = TxtFechaEstreno.Text,
+                    Director = TxtDirector.Text,
+                    Recaudacion = Convert.ToDecimal(TxtRecaudacion.Value)
+                };
+                int result = PeliculaRepo.InsertPelicula(pelicula1);
 
-            if (result == 0) {
-                MessageBox.Show("No se realizo el Ingreso");
-            }
-            else
-            {
-                MessageBox.Show("Ingreso correcto");
-                ResetForm();
+                if (result == 0)
+                {
+                    MessageBox.Show("No se realizo el Ingreso");
+                }
+                else
+                {
+                    MessageBox.Show("Ingreso correcto");
+                    ResetForm();
+                }
             }
 
         }

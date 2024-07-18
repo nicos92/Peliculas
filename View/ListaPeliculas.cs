@@ -30,18 +30,15 @@ namespace Peliculas.View
 
         private void DataSelectionChanged()
         {
-            if (DataGridPeliculas.CurrentRow != null)
-            {
 
+            PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
+            pelicula.CargarDatos(Convert.ToInt32(DataGridPeliculas.CurrentRow.Cells["ID"].Value),
+                                DataGridPeliculas.CurrentRow.Cells["Titulo"].Value.ToString(),
+                                DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value.ToString(),
+                                DataGridPeliculas.CurrentRow.Cells["Director"].Value.ToString(),
+                                Convert.ToDecimal(DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value)
+                                );
 
-                PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
-                pelicula.CargarDatos(Convert.ToInt32(DataGridPeliculas.CurrentRow.Cells["ID"].Value),
-                                    DataGridPeliculas.CurrentRow.Cells["Titulo"].Value.ToString(),
-                                    DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value.ToString(),
-                                    DataGridPeliculas.CurrentRow.Cells["Director"].Value.ToString(),
-                                    Convert.ToDecimal(DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value)
-                                    );
-            }
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
@@ -51,7 +48,7 @@ namespace Peliculas.View
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            DialogResult resul = MessageBox.Show("¿Seguro quiere eliminar?", "ELIMINACION", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult resul = UtilVistas.CartelConfirmWarn("¿Seguro quiere eliminar?", "Wliminacion");
             if (resul == DialogResult.Yes)
             {
 
@@ -64,12 +61,8 @@ namespace Peliculas.View
                 else
                 {
                     MessageBox.Show("No se pudo Eliminar");
-
                 }
-
             }
-
-
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
@@ -77,11 +70,7 @@ namespace Peliculas.View
             DataSelectionChanged();
             ActualizarPelicula actualizar = new();
             UtilVistas.MostrarVistas(actualizar, PanelPeliculas);
-
-
         }
-
-
 
         private void BtnEnable()
         {
@@ -89,14 +78,15 @@ namespace Peliculas.View
             {
                 BtnActualizar.Enabled = true;
                 BtnEliminar.Enabled = true;
+                BtnVer.Enabled = true;
             }
             else
             {
                 BtnActualizar.Enabled = false;
                 BtnEliminar.Enabled = false;
+                BtnVer.Enabled = false;
             }
         }
-
 
 
         private void DataGridPeliculas_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -112,6 +102,13 @@ namespace Peliculas.View
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
             DataGridPeliculas.DataSource = PeliculaRepo.FindPeliculas(TxtBuscar.Text);
+        }
+
+        private void BtnVer_Click(object sender, EventArgs e)
+        {
+            DataSelectionChanged();
+            VerPelicula verPelicula = new();
+            UtilVistas.MostrarVistas(verPelicula, PanelPeliculas);
         }
     }
 }
