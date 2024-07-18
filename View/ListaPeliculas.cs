@@ -51,8 +51,10 @@ namespace Peliculas.View
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            if (DataGridPeliculas.CurrentRow.Cells["ID"].Value.ToString() != null)
+            DialogResult resul = MessageBox.Show("¿Seguro quiere eliminar?", "ELIMINACION", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (resul == DialogResult.Yes)
             {
+
                 int result = PeliculaRepo.EliminarPelicula(DataGridPeliculas.CurrentRow.Cells["ID"].Value.ToString() ?? "0");
                 if (result != 0)
                 {
@@ -64,7 +66,9 @@ namespace Peliculas.View
                     MessageBox.Show("No se pudo Eliminar");
 
                 }
+
             }
+
 
         }
 
@@ -93,7 +97,7 @@ namespace Peliculas.View
             }
         }
 
-        
+
 
         private void DataGridPeliculas_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {

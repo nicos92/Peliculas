@@ -6,9 +6,9 @@ public class DatabaseConnection
 {
     private static DatabaseConnection? _instance;
     private static readonly object _lock = new();
-    private readonly SqlConnection _connection;
+    private SqlConnection _connection;
     private const string DATABASE = "peliculas"; // NOMBRE DE LA BASE DE DATOS
-    private const string DATASOURCE = "nicos\\SQLEXPRESS";
+    private const string DATASOURCE = "e";//"nicos\\SQLEXPRESS";
     private const string INTEGRATED_SECURITY = "SSPI"; //  se utilizan las credenciales de la cuenta de Windows actual para la autenticación.
     private const string PERSIST_SECURITY_INFO = "false";
 
@@ -25,7 +25,10 @@ public class DatabaseConnection
             {
                 lock (_lock)
                 {
-                    _instance ??= new DatabaseConnection();
+                    if (_instance == null)
+                    { 
+                        _instance = new DatabaseConnection(); 
+                    }
                 }
             }
             return _instance;
@@ -39,11 +42,13 @@ public class DatabaseConnection
 
     public void Open()
     {
-        _connection.Open();
+        if (_instance != null)
+            _connection.Open();
     }
 
     public void Close()
     {
-        _connection.Close();
+        if (_instance != null)
+            _connection.Close();
     }
 }

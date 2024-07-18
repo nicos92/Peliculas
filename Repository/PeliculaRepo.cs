@@ -1,10 +1,11 @@
-﻿using Peliculas.ConexBD;
+﻿
 using Peliculas.Model;
 using Peliculas.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.NetworkInformation;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -16,32 +17,31 @@ namespace Peliculas.Repository
     {
         public static int InsertPelicula(Pelicula pelicula)
         {
-            /*
-            using SqlConnection connection = ConexBD.ConexBD.GetConnection();
-            if (connection != null)
-            {
-                string insert = $"insert into pelicula values('{pelicula.Titulo}', '{pelicula.FechaEstreno}', '{pelicula.Director}', '{pelicula.Recaudacion}')";
-                MessageBox.Show(insert);
-                SqlCommand cmd = new(insert, connection);
-                return cmd.ExecuteNonQuery();
-            }
 
-            return 0;
-            */
             int result = 0;
-            using (var connection = DatabaseConnection.Instance.Connection)
+            try
             {
-                if (connection != null)
-                {
-                    connection.Open();
-                    string insert = $"insert into pelicula values('{pelicula.Titulo}', '{pelicula.FechaEstreno}', '{pelicula.Director}', '{pelicula.Recaudacion}')";
-                    MessageBox.Show(insert);
-                    SqlCommand cmd = new(insert, connection);
-                    result = cmd.ExecuteNonQuery();
-                    connection.Close();
-                }
-                // Ejecuta consultas o operaciones con la base de datos
+                 DatabaseConnection dbconn = DatabaseConnection.Instance;
+                
+                
+                dbconn.Open();
+                string insert = $"insert into pelicula values('{pelicula.Titulo}', '{pelicula.FechaEstreno}', '{pelicula.Director}', '{pelicula.Recaudacion}')";
+
+                SqlCommand cmd = new(insert, dbconn.Connection);
+                result = cmd.ExecuteNonQuery();
+                dbconn.Close();   
+
             }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+
+            }
+            
             return result;
         }
 
@@ -49,11 +49,15 @@ namespace Peliculas.Repository
         {
             List<Pelicula> peliculas = [];
 
-            string all = "select * from pelicula";
-            using SqlConnection connection = ConexBD.ConexBD.GetConnection();
-            if (connection != null)
+            try
             {
-                SqlCommand cmd = new(all, connection);
+                DatabaseConnection dbconn = DatabaseConnection.Instance;
+
+
+                dbconn.Open();
+
+                string all = "select * from pelicula";
+                SqlCommand cmd = new(all, dbconn.Connection);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -69,41 +73,78 @@ namespace Peliculas.Repository
 
                     peliculas.Add(pelicula1);
                 }
-                connection.Close();
+                dbconn.Close();
 
             }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
 
+            }
             return peliculas;
 
         }
 
         public static int ActualizarPelicula(Pelicula pelicula)
         {
-
-            using SqlConnection connection = ConexBD.ConexBD.GetConnection();
-            if (connection != null)
+            int result = 0;
+            try
             {
-                string actualizar = $"update pelicula set pelicula= '{pelicula.Titulo}', fecha_estreno='{pelicula.FechaEstreno}', director='{pelicula.Director}', recaudacion={pelicula.Recaudacion} where id={pelicula.Id};";
+                DatabaseConnection dbconn = DatabaseConnection.Instance;
 
-                MessageBox.Show("actualizar: " + actualizar);
-                SqlCommand sqlCommand = new(actualizar, connection);
-                return sqlCommand.ExecuteNonQuery();
+
+                dbconn.Open();
+
+                string actualizar = $"update pelicula set titulo='{pelicula.Titulo}', fecha_estreno='{pelicula.FechaEstreno}', director='{pelicula.Director}', recaudacion={pelicula.Recaudacion} where id={pelicula.Id};";
+
+                SqlCommand sqlCommand = new(actualizar, dbconn.Connection);
+                result = sqlCommand.ExecuteNonQuery();
+                dbconn.Close();
+
             }
-            return 0;
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+
+            }
+            return result;
 
         }
 
         public static int EliminarPelicula(string id)
         {
-            using SqlConnection sqlConnection = ConexBD.ConexBD.GetConnection();
-            if (sqlConnection != null)
+            int result = 0;
+            try
             {
+                DatabaseConnection dbconn = DatabaseConnection.Instance;
+
+
+                dbconn.Open();
                 string eliminar = $"delete from pelicula where Id = {id};";
-                SqlCommand sqlCommand = new(eliminar, sqlConnection);
-                return sqlCommand.ExecuteNonQuery();
+                SqlCommand sqlCommand = new(eliminar, dbconn.Connection);
+                result = sqlCommand.ExecuteNonQuery();
+                dbconn.Close();
+
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+
             }
 
-            return 0;
+            return result;
         }
     }
 }

@@ -34,28 +34,31 @@ namespace Peliculas.View
 
         private void BtnActualizarActualizar_Click(object sender, EventArgs e)
         {
-            Pelicula pelicula1 = new()
+            DialogResult resul = MessageBox.Show("¿Seguro quiere Actualizar?", "ACTUALIZACION", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (resul == DialogResult.Yes)
             {
-                Id = Convert.ToInt32(TxtIdActualizar.Text),
-                Titulo = TxtTituloActualizar.Text,
-                FechaEstreno = TxtFechaEstrenoActualizar.Text,
-                Director = TxtDirectorActualizar.Text,
-                Recaudacion = Convert.ToDecimal(TxtRecaudacionActualizar.Value)
-            };
+                Pelicula pelicula1 = new()
+                {
+                    Id = Convert.ToInt32(TxtIdActualizar.Text),
+                    Titulo = TxtTituloActualizar.Text,
+                    FechaEstreno = TxtFechaEstrenoActualizar.Text,
+                    Director = TxtDirectorActualizar.Text,
+                    Recaudacion = Convert.ToDecimal(TxtRecaudacionActualizar.Value)
+                };
 
-            pelicula1.VerDatos();
-            int result = PeliculaRepo.ActualizarPelicula(pelicula1);
+                int result = PeliculaRepo.ActualizarPelicula(pelicula1);
 
-            if (result == 0)
-            {
-                MessageBox.Show("No se realizo la Actualizacion");
+                if (result == 0)
+                {
+                    MessageBox.Show("No se realizo la Actualizacion");
+                }
+                else
+                {
+                    MessageBox.Show("Actualizacion correcta");
+
+                }
+                UtilVistas.MostrarVistas(new ListaPeliculas(), Panel1Actualizar);
             }
-            else
-            {
-                MessageBox.Show("Actualizacion correcta");
-
-            }
-            UtilVistas.MostrarVistas(new ListaPeliculas(), Panel1Actualizar);
         }
 
     }

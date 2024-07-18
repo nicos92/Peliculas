@@ -1,6 +1,8 @@
 using Peliculas.Model;
+using Peliculas.Singleton;
 using Peliculas.Utils;
 using Peliculas.View;
+using System.Data.SqlClient;
 
 namespace Peliculas
 {
@@ -14,15 +16,24 @@ namespace Peliculas
 
         private static void ConexionBD()
         {
-            using var conn = ConexBD.ConexBD.GetConnection();
-            if (conn != null)
+            try
             {
-                MessageBox.Show("Conexion exitosa con Base de Datos");
-                conn.Close();
+                DatabaseConnection dbconn = DatabaseConnection.Instance;
+
+
+                dbconn.Open();
+                    MessageBox.Show("Conexion exitosa con Base de Datos");
+                    dbconn.Close();
+                
             }
-            else
+            catch (SqlException e)
             {
-                MessageBox.Show("No hay conexion con la Base de Datos");
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show("Error en base de datos: \n" + e.Message);
+
             }
 
         }
@@ -40,24 +51,16 @@ namespace Peliculas
             UtilVistas.MostrarVistas(ingresarPelicula, PanelVistas);
         }
 
-        private void BtnConsultar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnEliminar_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Inicio inicio = new ();
+            Inicio inicio = new();
             UtilVistas.MostrarVistas(inicio, PanelVistas);
             ConexionBD();
 
         }
 
-       
+
     }
 }

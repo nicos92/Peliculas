@@ -31,8 +31,6 @@
             panel1 = new Panel();
             PanelVistas = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
-            BtnEliminar = new Button();
-            BtnConsultar = new Button();
             BtnIngresar = new Button();
             BtnVerTodas = new Button();
             panel1.SuspendLayout();
@@ -61,8 +59,6 @@
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(BtnEliminar, 0, 3);
-            tableLayoutPanel1.Controls.Add(BtnConsultar, 0, 2);
             tableLayoutPanel1.Controls.Add(BtnIngresar, 0, 1);
             tableLayoutPanel1.Controls.Add(BtnVerTodas, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Left;
@@ -76,32 +72,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 41.17647F));
             tableLayoutPanel1.Size = new Size(200, 461);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // BtnEliminar
-            // 
-            BtnEliminar.Dock = DockStyle.Fill;
-            BtnEliminar.FlatAppearance.BorderSize = 3;
-            BtnEliminar.Font = new Font("Segoe UI", 12F);
-            BtnEliminar.Location = new Point(3, 204);
-            BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(194, 61);
-            BtnEliminar.TabIndex = 3;
-            BtnEliminar.Text = "Eliminacion";
-            BtnEliminar.UseVisualStyleBackColor = true;
-            BtnEliminar.Click += BtnEliminar_Click;
-            // 
-            // BtnConsultar
-            // 
-            BtnConsultar.Dock = DockStyle.Fill;
-            BtnConsultar.FlatAppearance.BorderSize = 3;
-            BtnConsultar.Font = new Font("Segoe UI", 12F);
-            BtnConsultar.Location = new Point(3, 137);
-            BtnConsultar.Name = "BtnConsultar";
-            BtnConsultar.Size = new Size(194, 61);
-            BtnConsultar.TabIndex = 2;
-            BtnConsultar.Text = "Consulta";
-            BtnConsultar.UseVisualStyleBackColor = true;
-            BtnConsultar.Click += BtnConsultar_Click;
             // 
             // BtnIngresar
             // 
@@ -149,8 +119,6 @@
 
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel1;
-        private Button BtnEliminar;
-        private Button BtnConsultar;
         private Button BtnIngresar;
         private Button BtnVerTodas;
         private Panel PanelVistas;
