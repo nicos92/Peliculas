@@ -1,6 +1,7 @@
 ﻿
 using Peliculas.Model;
 using Peliculas.Singleton;
+using Peliculas.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -19,9 +20,10 @@ namespace Peliculas.Repository
         {
 
             int result = 0;
+             
             try
             {
-                 DatabaseConnection dbconn = DatabaseConnection.Instance;
+                DatabaseConnection dbconn = DatabaseConnection.Instance;
                 
                 
                 dbconn.Open();
@@ -34,14 +36,19 @@ namespace Peliculas.Repository
             }
             catch (SqlException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
+
 
             }
-            
+
+
+
             return result;
         }
 
@@ -66,9 +73,9 @@ namespace Peliculas.Repository
                     {
                         Id = reader.GetInt32(0),
                         Titulo = reader.GetString(1),
-                        FechaEstreno = reader.GetDateTime(2).ToString(),
+                        FechaEstreno = reader.GetDateTime(2).ToString("yyyy-MM-dd"),
                         Director = reader.GetString(3),
-                        Recaudacion = reader.GetDecimal(4)
+                        Recaudacion = reader.GetDecimal(4).ToString()
                     };
 
                     peliculas.Add(pelicula1);
@@ -78,11 +85,14 @@ namespace Peliculas.Repository
             }
             catch (SqlException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
+
 
             }
             return peliculas;
@@ -108,11 +118,14 @@ namespace Peliculas.Repository
             }
             catch (SqlException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
+
 
             }
             return result;
@@ -136,11 +149,14 @@ namespace Peliculas.Repository
             }
             catch (SqlException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
+
 
             }
 
@@ -166,9 +182,9 @@ namespace Peliculas.Repository
                     {
                         Id = reader.GetInt32(0),
                         Titulo = reader.GetString(1),
-                        FechaEstreno = reader.GetDateTime(2).ToString(),
+                        FechaEstreno = reader.GetDateTime(2).ToString("yyyy-MM-dd"),
                         Director = reader.GetString(3),
-                        Recaudacion = reader.GetDecimal(4)
+                        Recaudacion = reader.GetDecimal(4).ToString()
                     };
 
                     peliculas.Add(pelicula1);
@@ -178,11 +194,14 @@ namespace Peliculas.Repository
             }
             catch (SqlException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                MessageBox.Show("Error en base de datos: \n" + e.Message);
+                DatabaseConnection.Instance.Close();
+                Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
+
 
             }
 

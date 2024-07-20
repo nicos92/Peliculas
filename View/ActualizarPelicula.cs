@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Peliculas.View
 {
@@ -29,12 +31,12 @@ namespace Peliculas.View
             TxtTituloActualizar.Text = pelicula.Titulo;
             TxtFechaEstrenoActualizar.Text = pelicula.FechaEstreno;
             TxtDirectorActualizar.Text = pelicula.Director;
-            TxtRecaudacionActualizar.Value = Convert.ToDecimal(pelicula.Recaudacion);
+            TxtRecaudacionAct.Text = pelicula.Recaudacion;
         }
 
         private void BtnActualizarActualizar_Click(object sender, EventArgs e)
         {
-            DialogResult resul = UtilVistas.CartelConfirmWarn("¿Seguro quiere Actualizar?", "Actualizacion");
+            DialogResult resul = Utils.Utils.CartelConfirmWarn("¿Seguro quiere Actualizar?", "Actualizacion");
             if (resul == DialogResult.Yes)
             {
                 Pelicula pelicula1 = new()
@@ -43,23 +45,42 @@ namespace Peliculas.View
                     Titulo = TxtTituloActualizar.Text,
                     FechaEstreno = TxtFechaEstrenoActualizar.Text,
                     Director = TxtDirectorActualizar.Text,
-                    Recaudacion = Convert.ToDecimal(TxtRecaudacionActualizar.Value.ToString().Replace(",", "."))
+                    Recaudacion = TxtRecaudacionAct.Text
                 };
 
                 int result = PeliculaRepo.ActualizarPelicula(pelicula1);
 
                 if (result == 0)
                 {
-                    MessageBox.Show("No se realizo la Actualizacion");
+                    Utils.Utils.CartelConfirmInfo("No se realizo la Actualizacion", "Actualizacion");
                 }
                 else
                 {
-                    MessageBox.Show("Actualizacion correcta");
-
+                    Utils.Utils.CartelConfirmInfo("Actualizacion correcta", "Actualizacion");
                 }
-                UtilVistas.MostrarVistas(new ListaPeliculas(), Panel1Actualizar);
+                MiPanelVistas.MostrarVistas(new ListaPeliculas());
             }
         }
 
+        public void BtnEnabled()
+        {
+            bool bEnabled = Utils.Utils.ValidarInt(TxtRecaudacionAct, TxtErrorRecaudacionAct);
+            BtnActualizarActualizar.Enabled = (TxtDirectorActualizar.Text.Length > 0 && TxtTituloActualizar.Text.Length > 0 && TxtRecaudacionAct.Text.Length > 0 && !bEnabled);
+        }
+
+        private void TxtRecaudacionAct_TextChanged(object sender, EventArgs e)
+        {
+            BtnEnabled();
+        }
+
+        private void TxtDirectorActualizar_TextChanged(object sender, EventArgs e)
+        {
+            BtnEnabled();
+        }
+
+        private void TxtTituloActualizar_TextChanged(object sender, EventArgs e)
+        {
+            BtnEnabled();
+        }
     }
 }

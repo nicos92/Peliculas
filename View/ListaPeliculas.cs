@@ -36,7 +36,7 @@ namespace Peliculas.View
                                 DataGridPeliculas.CurrentRow.Cells["Titulo"].Value.ToString(),
                                 DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value.ToString(),
                                 DataGridPeliculas.CurrentRow.Cells["Director"].Value.ToString(),
-                                Convert.ToDecimal(DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value)
+                                DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value.ToString()
                                 );
 
         }
@@ -48,19 +48,19 @@ namespace Peliculas.View
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            DialogResult resul = UtilVistas.CartelConfirmWarn("¿Seguro quiere eliminar?", "Wliminacion");
+            DialogResult resul = Utils.Utils.CartelConfirmWarn("¿Seguro quiere eliminar?", "Wliminacion");
             if (resul == DialogResult.Yes)
             {
 
                 int result = PeliculaRepo.EliminarPelicula(DataGridPeliculas.CurrentRow.Cells["ID"].Value.ToString() ?? "0");
                 if (result != 0)
                 {
-                    MessageBox.Show("Eliminacion Correcta");
+                    Utils.Utils.CartelConfirmInfo("Eliminacion Correcta", "ELIMINACION");
                     CargarListaPeliculas();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo Eliminar");
+                    Utils.Utils.CartelError("No se pudo Eliminar", "ELIMINACION");
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace Peliculas.View
         {
             DataSelectionChanged();
             ActualizarPelicula actualizar = new();
-            UtilVistas.MostrarVistas(actualizar, PanelPeliculas);
+            MiPanelVistas.MostrarVistas(actualizar);
         }
 
         private void BtnEnable()
@@ -79,12 +79,14 @@ namespace Peliculas.View
                 BtnActualizar.Enabled = true;
                 BtnEliminar.Enabled = true;
                 BtnVer.Enabled = true;
+                BtnBuscar.Enabled = true;
             }
             else
             {
                 BtnActualizar.Enabled = false;
                 BtnEliminar.Enabled = false;
                 BtnVer.Enabled = false;
+                BtnBuscar.Enabled = false;
             }
         }
 
@@ -108,7 +110,7 @@ namespace Peliculas.View
         {
             DataSelectionChanged();
             VerPelicula verPelicula = new();
-            UtilVistas.MostrarVistas(verPelicula, PanelPeliculas);
+            MiPanelVistas.MostrarVistas(verPelicula);
         }
     }
 }

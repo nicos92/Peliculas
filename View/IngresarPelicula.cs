@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,12 +27,12 @@ namespace Peliculas.View
             TxtTitulo.Clear();
             TxtFechaEstreno.ResetText();
             TxtDirector.Clear();
-            TxtRecaudacion.ResetText();
+            TxtRecaudacionIng.Clear();
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = UtilVistas.CartelConfirmWarn("¿Seguro quiere ingresar?", "Ingreso");
+            DialogResult dialogResult = Utils.Utils.CartelConfirmWarn("¿Seguro quiere ingresar?", "Ingreso");
             if (dialogResult == DialogResult.Yes)
             {
                 Pelicula pelicula1 = new()
@@ -38,21 +40,48 @@ namespace Peliculas.View
                     Titulo = TxtTitulo.Text,
                     FechaEstreno = TxtFechaEstreno.Text,
                     Director = TxtDirector.Text,
-                    Recaudacion = Convert.ToDecimal(TxtRecaudacion.Value)
+                    Recaudacion = TxtRecaudacionIng.Text
                 };
                 int result = PeliculaRepo.InsertPelicula(pelicula1);
 
                 if (result == 0)
                 {
-                    MessageBox.Show("No se realizo el Ingreso");
+                    Utils.Utils.CartelError("No se realizo el Ingreso", "Ingreso Incorrecto");
                 }
                 else
                 {
-                    MessageBox.Show("Ingreso correcto");
+                    Utils.Utils.CartelConfirmInfo( "EL Ingreso se Realizo Correctamente", "Ingreso Correcto");
                     ResetForm();
                 }
+                TxtTitulo.Focus();
             }
+        }
 
+        public void BtnEnable()
+        {
+            bool bEnabled = Utils.Utils.ValidarInt(TxtRecaudacionIng, TxtErrorRecaudacion);
+            BtnGuardar.Enabled = (TxtDirector.Text.Length > 0 && TxtRecaudacionIng.Text.Length > 0 && TxtTitulo.Text.Length > 0 && !bEnabled);
+        }
+
+
+        private void TxtRecaudacionIng_TextChanged(object sender, EventArgs e)
+        {
+            BtnEnable();
+        }
+
+        private void TxtDirector_TextChanged(object sender, EventArgs e)
+        {
+            BtnEnable();
+        }
+
+        private void TxtTitulo_TextChanged(object sender, EventArgs e)
+        {
+            BtnEnable();
+        }
+
+        private void IngresarPelicula_Load(object sender, EventArgs e)
+        {
+            TxtTitulo.Focus();
         }
     }
 }

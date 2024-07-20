@@ -1,4 +1,6 @@
-﻿namespace Peliculas
+﻿using Peliculas.Singleton;
+
+namespace Peliculas
 {
     partial class Form1
     {
@@ -29,31 +31,24 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            PanelVistas = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             BtnIngresar = new Button();
             BtnVerTodas = new Button();
+            PanelVistas = new Panel();
+            _MiPanelVistas = MiPanelVistas.GetInstancia;
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(PanelVistas);
             panel1.Controls.Add(tableLayoutPanel1);
+            panel1.Controls.Add(_MiPanelVistas.GetPanel);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(784, 461);
             panel1.TabIndex = 0;
-            // 
-            // PanelVistas
-            // 
-            PanelVistas.Dock = DockStyle.Fill;
-            PanelVistas.Location = new Point(200, 0);
-            PanelVistas.Name = "PanelVistas";
-            PanelVistas.Size = new Size(584, 461);
-            PanelVistas.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
@@ -81,7 +76,7 @@
             BtnIngresar.Location = new Point(3, 70);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(194, 61);
-            BtnIngresar.TabIndex = 1;
+            BtnIngresar.TabIndex = 45;
             BtnIngresar.Text = "Ingreso";
             BtnIngresar.UseVisualStyleBackColor = true;
             BtnIngresar.Click += BtnIngresar_Click;
@@ -94,10 +89,18 @@
             BtnVerTodas.Location = new Point(3, 3);
             BtnVerTodas.Name = "BtnVerTodas";
             BtnVerTodas.Size = new Size(194, 61);
-            BtnVerTodas.TabIndex = 0;
+            BtnVerTodas.TabIndex = 44;
             BtnVerTodas.Text = "Peliculas";
             BtnVerTodas.UseVisualStyleBackColor = true;
             BtnVerTodas.Click += BtnVerTodas_Click;
+            // 
+            // PanelVistas
+            // 
+            PanelVistas.Dock = DockStyle.Fill;
+            PanelVistas.Location = new Point(200, 0);
+            PanelVistas.Name = "PanelVistas";
+            PanelVistas.Size = new Size(584, 461);
+            PanelVistas.TabIndex = 1;
             // 
             // Form1
             // 
@@ -122,5 +125,6 @@
         private Button BtnIngresar;
         private Button BtnVerTodas;
         private Panel PanelVistas;
+        private MiPanelVistas _MiPanelVistas;
     }
 }

@@ -16,7 +16,7 @@ namespace Peliculas.Singleton
         public string? FechaEstreno { get; set; }
         public string? Director { get; set; }
 
-        public decimal? Recaudacion { get; set; }
+        public string? Recaudacion { get; set; }
 
         private PeliculaSingleton() { }
 
@@ -37,7 +37,7 @@ namespace Peliculas.Singleton
             return $"ID: {Id}, Titulo: {Titulo}, Fecha de Estreno: {FechaEstreno}, Director: {Director}, Recaudacion: {Recaudacion}";
         }
 
-        public void CargarDatos(int v1, string? v2, string? v3, string? v4, decimal v5)
+        public void CargarDatos(int v1, string? v2, string? v3, string? v4, string? v5)
         {
             Id = v1;
             Titulo = v2;

@@ -12,9 +12,9 @@ namespace Peliculas.Model
         public string? Titulo { get; set; }
         public string? Director {  get; set; }
         public string? FechaEstreno { get; set; }
-        public decimal? Recaudacion { get; set; }
+        public string? Recaudacion { get; set; }
 
-        public Pelicula(string titulo, string director, string fechaEstreno, decimal recaudacion) :this()
+        public Pelicula(string titulo, string director, string fechaEstreno, string recaudacion) :this()
         {
             this.Titulo = titulo;
             this.Director = director;
@@ -24,7 +24,7 @@ namespace Peliculas.Model
 
         public void VerDatos()
         {
-            MessageBox.Show($"{Titulo} {FechaEstreno} {Director}  {  Recaudacion}");
+            MessageBox.Show($"{Titulo} {FechaEstreno} {Director}, Recaudacion: {Recaudacion}");
         }
        
     }
