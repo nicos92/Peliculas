@@ -29,7 +29,7 @@ namespace Peliculas.Repository
                 dbconn.Open();
                 string insert = $"insert into pelicula values('{pelicula.Titulo}', '{pelicula.FechaEstreno}', '{pelicula.Director}', '{pelicula.Recaudacion}')";
 
-                SqlCommand cmd = new(insert, dbconn.Connection);
+                using SqlCommand cmd = new(insert, dbconn.Connection);
                 result = cmd.ExecuteNonQuery();
                 dbconn.Close();   
 
@@ -64,8 +64,8 @@ namespace Peliculas.Repository
                 dbconn.Open();
 
                 string all = "select * from pelicula";
-                SqlCommand cmd = new(all, dbconn.Connection);
-                SqlDataReader reader = cmd.ExecuteReader();
+                using SqlCommand cmd = new(all, dbconn.Connection);
+                using SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -111,7 +111,7 @@ namespace Peliculas.Repository
 
                 string actualizar = $"update pelicula set titulo='{pelicula.Titulo}', fecha_estreno='{pelicula.FechaEstreno}', director='{pelicula.Director}', recaudacion={pelicula.Recaudacion} where id={pelicula.Id};";
 
-                SqlCommand sqlCommand = new(actualizar, dbconn.Connection);
+                using SqlCommand sqlCommand = new(actualizar, dbconn.Connection);
                 result = sqlCommand.ExecuteNonQuery();
                 dbconn.Close();
 
@@ -142,7 +142,7 @@ namespace Peliculas.Repository
 
                 dbconn.Open();
                 string eliminar = $"delete from pelicula where Id = {id};";
-                SqlCommand sqlCommand = new(eliminar, dbconn.Connection);
+                using SqlCommand sqlCommand = new(eliminar, dbconn.Connection);
                 result = sqlCommand.ExecuteNonQuery();
                 dbconn.Close();
 
@@ -170,11 +170,12 @@ namespace Peliculas.Repository
             {
                 DatabaseConnection dbconn = DatabaseConnection.Instance;
 
-                dbconn.Open();
 
                 string Find = $"select * from pelicula where titulo like '%{pelicula}%'";
-                SqlCommand cmd = new(Find, dbconn.Connection);
-                SqlDataReader reader = cmd.ExecuteReader();
+                using SqlCommand cmd = new(Find, dbconn.Connection);
+
+                dbconn.Open();
+                using SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
