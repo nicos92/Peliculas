@@ -26,10 +26,12 @@ namespace Peliculas.View
 
         private void CargarCampos()
         {
+            
             PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
+            pelicula.VerDatos();
             TxtIdActualizar.Text = pelicula.Id.ToString();
             TxtTituloActualizar.Text = pelicula.Titulo;
-            TxtFechaEstrenoActualizar.Text = pelicula.FechaEstreno;
+            TxtFechaEstrenoActualizar.Value = Convert.ToDateTime(pelicula.FechaEstreno);
             TxtDirectorActualizar.Text = pelicula.Director;
             TxtRecaudacionAct.Text = pelicula.Recaudacion;
         }

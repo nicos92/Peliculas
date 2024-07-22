@@ -82,6 +82,8 @@ namespace Peliculas.View
         private void IngresarPelicula_Load(object sender, EventArgs e)
         {
             TxtTitulo.Focus();
+            TxtFechaEstreno.MaxDate = DateTime.Now; 
+            TxtFechaEstreno.Value    = DateTime.Today;
         }
     }
 }

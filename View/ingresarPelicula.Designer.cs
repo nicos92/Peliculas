@@ -174,12 +174,12 @@
             TxtFechaEstreno.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtFechaEstreno.Format = DateTimePickerFormat.Custom;
             TxtFechaEstreno.Location = new Point(233, 106);
-            TxtFechaEstreno.MaxDate = new DateTime(2024, 7, 17, 0, 0, 0, 0);
+            TxtFechaEstreno.MaxDate = new DateTime(2024, 7, 22, 0, 0, 0, 0);
             TxtFechaEstreno.MinDate = new DateTime(1950, 1, 1, 0, 0, 0, 0);
             TxtFechaEstreno.Name = "TxtFechaEstreno";
             TxtFechaEstreno.Size = new Size(283, 23);
             TxtFechaEstreno.TabIndex = 1;
-            TxtFechaEstreno.Value = new DateTime(2024, 7, 17, 0, 0, 0, 0);
+            TxtFechaEstreno.Value = new DateTime(2024, 7, 22, 0, 0, 0, 0);
             // 
             // tableLayoutPanel2
             // 

@@ -28,11 +28,11 @@ namespace Peliculas.View
             PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
             TxtIdVer.Text = pelicula.Id.ToString();
             TxtTituloVer.Text = pelicula.Titulo;
-            TxtFechaEstrenoVer.Text = pelicula.FechaEstreno;
+            TxtFechaEstrenoVer.Value = Convert.ToDateTime(pelicula.FechaEstreno);
             TxtDirectorVer.Text = pelicula.Director;
             TxtRecaudacionVer.Text = pelicula.Recaudacion;
         }
-
+        
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
             DialogResult resul = Utils.Utils.CartelConfirmWarn("¿Seguro quiere Actualizar?", "Actualizacion");

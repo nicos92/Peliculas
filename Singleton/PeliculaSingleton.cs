@@ -13,7 +13,7 @@ namespace Peliculas.Singleton
 
         public int? Id { get; set; }
         public string? Titulo { get; set; }
-        public string? FechaEstreno { get; set; }
+        public DateTime? FechaEstreno { get; set; }
         public string? Director { get; set; }
 
         public string? Recaudacion { get; set; }
@@ -32,12 +32,12 @@ namespace Peliculas.Singleton
             return _instance;
         }
 
-        public string VerDatos()
+        public void VerDatos()
         {
-            return $"ID: {Id}, Titulo: {Titulo}, Fecha de Estreno: {FechaEstreno}, Director: {Director}, Recaudacion: {Recaudacion}";
+            MessageBox.Show($"ID: {Id}, Titulo: {Titulo}, Fecha de Estreno: {FechaEstreno}, Director: {Director}, Recaudacion: {Recaudacion}");
         }
 
-        public void CargarDatos(int v1, string? v2, string? v3, string? v4, string? v5)
+        public void CargarDatos(int v1, string? v2, DateTime? v3, string? v4, string? v5)
         {
             Id = v1;
             Titulo = v2;

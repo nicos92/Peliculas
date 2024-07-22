@@ -277,6 +277,8 @@
             PerformLayout();
         }
 
+       
+
         #endregion
 
         private Panel PanelVerPelicula;

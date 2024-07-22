@@ -34,7 +34,7 @@ namespace Peliculas.View
             PeliculaSingleton pelicula = PeliculaSingleton.GetInstance();
             pelicula.CargarDatos(Convert.ToInt32(DataGridPeliculas.CurrentRow.Cells["ID"].Value),
                                 DataGridPeliculas.CurrentRow.Cells["Titulo"].Value.ToString(),
-                                DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value.ToString(),
+                                Convert.ToDateTime(DataGridPeliculas.CurrentRow.Cells["FechaEstreno"].Value),
                                 DataGridPeliculas.CurrentRow.Cells["Director"].Value.ToString(),
                                 DataGridPeliculas.CurrentRow.Cells["Recaudacion"].Value.ToString()
                                 );

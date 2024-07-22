@@ -1,4 +1,5 @@
 ﻿
+using Npgsql;
 using Peliculas.Model;
 using Peliculas.Singleton;
 using Peliculas.Utils;
@@ -18,37 +19,28 @@ namespace Peliculas.Repository
     {
         public static int InsertPelicula(Pelicula pelicula)
         {
-
             int result = 0;
              
             try
             {
-                DatabaseConnection dbconn = DatabaseConnection.Instance;
-                
-                
-                dbconn.Open();
                 string insert = $"insert into pelicula values('{pelicula.Titulo}', '{pelicula.FechaEstreno}', '{pelicula.Director}', '{pelicula.Recaudacion}')";
 
-                using SqlCommand cmd = new(insert, dbconn.Connection);
+                using NpgsqlCommand cmd = new(insert, BDPostgre.Instance.GetConnection);
                 result = cmd.ExecuteNonQuery();
-                dbconn.Close();   
+                BDPostgre.Instance.CloseConnection();
+
 
             }
-            catch (SqlException e)
+            catch (NpgsqlException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
                 Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
                 Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
-
-
             }
-
-
-
             return result;
         }
 
@@ -58,42 +50,36 @@ namespace Peliculas.Repository
 
             try
             {
-                DatabaseConnection dbconn = DatabaseConnection.Instance;
-
-
-                dbconn.Open();
-
                 string all = "select * from pelicula";
-                using SqlCommand cmd = new(all, dbconn.Connection);
-                using SqlDataReader reader = cmd.ExecuteReader();
+                BDPostgre bDPostgre = BDPostgre.Instance;
+                using NpgsqlCommand npgsqlCommand = new(all, bDPostgre.GetConnection);
+                using NpgsqlDataReader reader = npgsqlCommand.ExecuteReader();
 
                 while (reader.Read())
                 {
                     Pelicula pelicula1 = new()
                     {
-                        Id = reader.GetInt32(0),
-                        Titulo = reader.GetString(1),
-                        FechaEstreno = reader.GetDateTime(2).ToString("yyyy-MM-dd"),
-                        Director = reader.GetString(3),
-                        Recaudacion = reader.GetDecimal(4).ToString()
+                        Titulo = reader.GetString(0),
+                        FechaEstreno = reader.GetDateTime(1).ToString("yyyy-MM-dd"),
+                        Director = reader.GetString(2),
+                        Recaudacion = reader.GetDecimal(3).ToString(),
+                        Id = reader.GetInt64(4)
                     };
 
                     peliculas.Add(pelicula1);
                 }
-                dbconn.Close();
+               bDPostgre.CloseConnection();
 
             }
-            catch (SqlException e)
+            catch (NpgsqlException e)
             {
-                DatabaseConnection.Instance.Close();
-                Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
+                BDPostgre.Instance.CloseConnection();
+                Utils.Utils.CartelError(e.Message, "Error en base de datos SQL EXCEPTION");
             }
             catch (InvalidOperationException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
                 Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
-
-
             }
             return peliculas;
 
@@ -104,26 +90,25 @@ namespace Peliculas.Repository
             int result = 0;
             try
             {
-                DatabaseConnection dbconn = DatabaseConnection.Instance;
+                
 
+                string actualizar = $"update pelicula set titulo='{pelicula.Titulo}', fecha_estreno='{pelicula.FechaEstreno}', director='{pelicula.Director}', recaudacion={pelicula.Recaudacion} where idpelicula={pelicula.Id};";
 
-                dbconn.Open();
-
-                string actualizar = $"update pelicula set titulo='{pelicula.Titulo}', fecha_estreno='{pelicula.FechaEstreno}', director='{pelicula.Director}', recaudacion={pelicula.Recaudacion} where id={pelicula.Id};";
-
-                using SqlCommand sqlCommand = new(actualizar, dbconn.Connection);
+                using NpgsqlCommand sqlCommand = new(actualizar, BDPostgre.Instance.GetConnection);
                 result = sqlCommand.ExecuteNonQuery();
-                dbconn.Close();
+                BDPostgre.Instance.CloseConnection();
+
 
             }
-            catch (SqlException e)
+            catch (NpgsqlException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
+
                 Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
                 Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
 
 
@@ -137,24 +122,23 @@ namespace Peliculas.Repository
             int result = 0;
             try
             {
-                DatabaseConnection dbconn = DatabaseConnection.Instance;
-
-
-                dbconn.Open();
-                string eliminar = $"delete from pelicula where Id = {id};";
-                using SqlCommand sqlCommand = new(eliminar, dbconn.Connection);
+                
+                string eliminar = $"delete from pelicula where idpelicula = {id};";
+                using NpgsqlCommand sqlCommand = new(eliminar, BDPostgre.Instance.GetConnection);
                 result = sqlCommand.ExecuteNonQuery();
-                dbconn.Close();
+                BDPostgre.Instance.CloseConnection();
 
             }
-            catch (SqlException e)
+            catch (NpgsqlException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
+
                 Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
+
                 Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
 
 
@@ -168,39 +152,40 @@ namespace Peliculas.Repository
             List<Pelicula> peliculas = [];
             try
             {
-                DatabaseConnection dbconn = DatabaseConnection.Instance;
 
 
                 string Find = $"select * from pelicula where titulo like '%{pelicula}%'";
-                using SqlCommand cmd = new(Find, dbconn.Connection);
 
-                dbconn.Open();
-                using SqlDataReader reader = cmd.ExecuteReader();
+                BDPostgre bDPostgre = BDPostgre.Instance;
+                using NpgsqlCommand npgsqlCommand = new(Find, bDPostgre.GetConnection);
+                using NpgsqlDataReader reader = npgsqlCommand.ExecuteReader();
 
                 while (reader.Read())
                 {
                     Pelicula pelicula1 = new()
                     {
-                        Id = reader.GetInt32(0),
-                        Titulo = reader.GetString(1),
-                        FechaEstreno = reader.GetDateTime(2).ToString("yyyy-MM-dd"),
-                        Director = reader.GetString(3),
-                        Recaudacion = reader.GetDecimal(4).ToString()
+                        Id = reader.GetInt32(4),
+                        Titulo = reader.GetString(0),
+                        FechaEstreno = reader.GetDateTime(1).ToString("yyyy-MM-dd"),
+                        Director = reader.GetString(2),
+                        Recaudacion = reader.GetDecimal(3).ToString()
                     };
 
                     peliculas.Add(pelicula1);
                 }
-                dbconn.Close();
+                bDPostgre.CloseConnection();
 
             }
-            catch (SqlException e)
+            catch (NpgsqlException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
+
                 Utils.Utils.CartelError("Error en base de datos SQL EXCEPTION", e.Message);
             }
             catch (InvalidOperationException e)
             {
-                DatabaseConnection.Instance.Close();
+                BDPostgre.Instance.CloseConnection();
+
                 Utils.Utils.CartelError("Error en base de datos INVALID OPERATION", e.Message);
 
 
